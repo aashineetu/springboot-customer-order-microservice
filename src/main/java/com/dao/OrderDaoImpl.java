@@ -47,7 +47,7 @@ public class OrderDaoImpl implements OrderDao {
 
             while (rowSet.next()) {
                 wrapper = new CustomerOrderResponseWrapper();
-                int customerId = rowSet.getInt("Customer_I");
+                int customerId = rowSet.getInt("Customer_ID");
                 String customerName = rowSet.getString("Customer_Name");
                 int orderId = rowSet.getInt("Order_ID");
                 int partId = rowSet.getInt("Part_ID");
@@ -97,6 +97,7 @@ public class OrderDaoImpl implements OrderDao {
      */
     //todo- currently working for one element of array, need make a loop and have to use batch update if multiple
     public CustomerOrderResponseWrapper createCustomerOrder(CreateOrderRequestWrapper createOrderRequestWrapper) throws OrderCreationException {
+        CustomerOrderResponseWrapper customerOrderResponseWrapper =  null;
         List<Parts> parts = createOrderRequestWrapper.getParts();
         Parts part = parts.get(0);
 
@@ -131,12 +132,31 @@ public class OrderDaoImpl implements OrderDao {
         }
 
         if (orderRefRow <= 0) {
+            // to-do need to implement transaction roll back logic from order table and throw the exception to controller if insert failed from ORDERS_PARTS_XREF table
+        }
+        else{
+            //to-do need to create another response object and remove the  "id" and "orderDate" field
+            customerOrderResponseWrapper = new CustomerOrderResponseWrapper();
+            Customers customers = new Customers();
+            customers.setId(createOrderRequestWrapper.getCustomers().getId());
+            customers.setName(createOrderRequestWrapper.getCustomers().getName());
+            customerOrderResponseWrapper.setCustomers(customers);
 
-            // need to implement transaction roll back logic from order table and throw the exception to controller if insert failed from ORDERS_PARTS_XREF table
-
+            List<Parts> partsList = new ArrayList<Parts>();
+            Parts custParts = new Parts();
+            custParts.setId(part.getId());
+            custParts.setName(part.getName());
+            custParts.setDescription(part.getDescription());
+            custParts.setQuantity(part.getQuantity());
+            Supplier supplier = new Supplier();
+            supplier.setId(part.getSupplier().getId());
+            supplier.setName(part.getSupplier().getName());
+            custParts.setSupplier(supplier);
+            partsList.add(custParts);
+            customerOrderResponseWrapper.setParts(partsList);
         }
         //TODO need map customer and parts from input request plus orderId and orderDate
-        return new CustomerOrderResponseWrapper();
+        return customerOrderResponseWrapper;
     }
 
     public static long generateRandom(int length) {
