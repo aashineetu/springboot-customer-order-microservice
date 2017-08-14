@@ -1,0 +1,4 @@
+applications:
+- name: vin-checker
+  memory: 768M
+  path: target/springboot-rest-vehicleVinChecker-1.0-SNAPSHOT.jar
