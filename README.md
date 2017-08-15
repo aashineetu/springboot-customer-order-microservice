@@ -6,6 +6,7 @@ Features.
 1. Spring boot
 2. swagger API
 3. Database operation
+4. lombok
 
 
 confirgure and build steps
@@ -43,4 +44,14 @@ click on  "try it out" from swagger UI
 }
 
 Note : currently in the database there are only few customer,
-part and supplier record are there, we have to use only which are available in Masters tables
+part and supplier record are there, we have to use(Insert Statement) only which are available in Masters tables
+
+
+Before building the project we have to configure ojdbc to our lcoal maven repo
+We have to add Oracle JDBC driver in your Maven local repository. follow the below step to configure OJBC to local maven repo
+1. download ojdbc8.jar from oracle website
+2. run the following command to create artifact in maven repo
+mvn install:install-file -Dfile={Path/to/your/ojdbc8.jar}
+      -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
+3. mvn clean install
+4. mvn idea:idea
