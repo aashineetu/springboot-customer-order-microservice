@@ -3,6 +3,7 @@ package com.order.controller;
 import com.entity.Customers;
 import com.exception.CustomerOrderException;
 import com.requetwrappers.CreateOrderRequestWrapper;
+import com.requetwrappers.CreateOrderResponseWrapper;
 import com.responsewrappers.CustomerOrderResponseWrapper;
 import com.serviceimpl.CustomerOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,7 @@ public class CustomerOrderController {
 
     public ResponseEntity<Object> createCustomerOrder(
             @RequestBody CreateOrderRequestWrapper createOrderRequestWrapper) throws Exception {
-        CustomerOrderResponseWrapper customerOrderResponseWrapper = null;
+        CreateOrderResponseWrapper customerOrderResponseWrapper = null;
 
         customerOrderResponseWrapper = customerOrderService.createCustomerOrder(createOrderRequestWrapper);
 

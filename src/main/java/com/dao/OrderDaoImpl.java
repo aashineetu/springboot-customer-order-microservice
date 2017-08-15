@@ -6,6 +6,7 @@ import com.entity.Supplier;
 import com.exception.CustomerOrderException;
 import com.exception.OrderCreationException;
 import com.requetwrappers.CreateOrderRequestWrapper;
+import com.requetwrappers.CreateOrderResponseWrapper;
 import com.responsewrappers.CustomerOrderResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -92,12 +93,12 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     /*
-    to do for insert statement, we have to insert data only in transactional tables i.e ORDERS and ORDERS_PARTS_XREF,
-     master tables data manage by admin ie, customers, suppliers and parts
+    to do - for insert statement, we have to insert data only in transactional tables i.e ORDERS and ORDERS_PARTS_XREF,
+     master tables data manage by admin i.e., customers, suppliers and parts
      */
     //todo- currently working for one element of array, need make a loop and have to use batch update if multiple
-    public CustomerOrderResponseWrapper createCustomerOrder(CreateOrderRequestWrapper createOrderRequestWrapper) throws OrderCreationException {
-        CustomerOrderResponseWrapper customerOrderResponseWrapper =  null;
+    public CreateOrderResponseWrapper createCustomerOrder(CreateOrderRequestWrapper createOrderRequestWrapper) throws OrderCreationException {
+        CreateOrderResponseWrapper createOrderResponseWrapper =  null;
         List<Parts> parts = createOrderRequestWrapper.getParts();
         Parts part = parts.get(0);
 
@@ -136,11 +137,11 @@ public class OrderDaoImpl implements OrderDao {
         }
         else{
             //to-do need to create another response object and remove the  "id" and "orderDate" field
-            customerOrderResponseWrapper = new CustomerOrderResponseWrapper();
+            createOrderResponseWrapper = new CreateOrderResponseWrapper();
             Customers customers = new Customers();
             customers.setId(createOrderRequestWrapper.getCustomers().getId());
             customers.setName(createOrderRequestWrapper.getCustomers().getName());
-            customerOrderResponseWrapper.setCustomers(customers);
+            createOrderResponseWrapper.setCustomers(customers);
 
             List<Parts> partsList = new ArrayList<Parts>();
             Parts custParts = new Parts();
@@ -153,10 +154,10 @@ public class OrderDaoImpl implements OrderDao {
             supplier.setName(part.getSupplier().getName());
             custParts.setSupplier(supplier);
             partsList.add(custParts);
-            customerOrderResponseWrapper.setParts(partsList);
+            createOrderResponseWrapper.setParts(partsList);
         }
         //TODO need map customer and parts from input request plus orderId and orderDate
-        return customerOrderResponseWrapper;
+        return createOrderResponseWrapper;
     }
 
     public static long generateRandom(int length) {

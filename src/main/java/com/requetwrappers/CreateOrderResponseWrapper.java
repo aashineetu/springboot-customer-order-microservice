@@ -10,15 +10,14 @@ import java.util.List;
  * Created by ashis on 8/12/2017.
  */
 
-
-public class CreateOrderRequestWrapper {
+public class CreateOrderResponseWrapper {
 
     private Customers customers;
     private List<Parts> parts = null;
 
 
 
-    public CreateOrderRequestWrapper() {
+    public CreateOrderResponseWrapper() {
     }
 
     /**
@@ -26,7 +25,7 @@ public class CreateOrderRequestWrapper {
      * @param parts
      * @param customers
      */
-    public CreateOrderRequestWrapper(Customers customers, List<Parts> parts) {
+    public CreateOrderResponseWrapper(Customers customers, List<Parts> parts) {
         super();
         this.customers = customers;
         this.parts = parts;

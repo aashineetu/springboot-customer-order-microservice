@@ -8,6 +8,7 @@ import com.entity.Supplier;
 import com.exception.CustomerOrderException;
 import com.exception.OrderCreationException;
 import com.requetwrappers.CreateOrderRequestWrapper;
+import com.requetwrappers.CreateOrderResponseWrapper;
 import com.responsewrappers.CustomerOrderResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by ashis on 4/1/2017.
+ * Created by ashis on 8/12/2017.
  */
 
 
@@ -61,7 +62,7 @@ public class CustomerOrderService {
         return orderDao.getOrders(numOfRec, partNumbers);
     }
 
-    public CustomerOrderResponseWrapper createCustomerOrder(CreateOrderRequestWrapper createOrderRequestWrapper) throws OrderCreationException{
+    public CreateOrderResponseWrapper createCustomerOrder(CreateOrderRequestWrapper createOrderRequestWrapper) throws OrderCreationException{
         //todo , need to create a method in dao and insert into database
         return orderDao.createCustomerOrder(createOrderRequestWrapper);
     }
