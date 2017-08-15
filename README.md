@@ -1,4 +1,4 @@
-# springboot-rest-vehicleVinChecker
+# springboot-customer-order-microserviceg
 
 
 
@@ -16,7 +16,7 @@ confirgure and build steps
 3. open the brower and type http://localhost:8080
 you will see the swagger screen 
 4. enter http://localhost:8888/api-docs in swagger search bar(to-do : need to configure swagger path so that swagger directly show the operation rather then entering the http://localhost:8888/api-docs)
-5.execute master table.txt to setup master data i.e. customer,parts,supplier
+5. execute master table.txt to setup master data i.e. customer,parts,supplier
 6.execute transactional tables.txt to retrive the data from database
 7.To retrive the record using get operation - put number or record i.e, 2 or 3 and part id as 1111, 2222 and
 click on  "try it out" from swagger UI
