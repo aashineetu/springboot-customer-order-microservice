@@ -1,0 +1,33 @@
+[
+  {
+    "customersList": [
+      {
+        "parts": [
+          {
+            "supplierLis": [
+              {
+                "supplierId": 11,
+                "name": "ABC Electronic"
+              }
+            ],
+            "partId": 111,
+            "quantity": 4,
+            "name": "RAM",
+            "description": "RAM for laptop",
+            "number": null
+          }
+        ],
+        "customerID": 1,
+        "name": "ashish"
+      }
+    ],
+    "ordersList": [
+      {
+        "orderID": 0,
+        "orderDate": "8/12/2017"
+      }
+    ],
+    "statusCode": "200",
+    "statusMessage": "success"
+  }
+]
