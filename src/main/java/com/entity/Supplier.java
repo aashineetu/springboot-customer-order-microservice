@@ -15,6 +15,9 @@ import lombok.ToString;
 @ToString(includeFieldNames = true)
 @EqualsAndHashCode(callSuper = false)
 
+/**
+ * Created by ashis on 8/15/2017.
+ */
 public class Supplier {
 
     private Integer id;
